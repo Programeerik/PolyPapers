@@ -1,10 +1,15 @@
 using PolyPapersApp.Components;
+using PolyPapersApp.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
+
+builder.Services.AddScoped<SemanticScholarService>();
+builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("https://api.semanticscholar.org/graph/v1/") });
+
 
 var app = builder.Build();
 
